@@ -44,9 +44,10 @@ st.markdown("""
         width: 100%;
     }
     
-    /* Ajuste de Alinhamento (Padding do Topo) */
+    /* --- AJUSTE CRÍTICO DE ALINHAMENTO --- */
+    /* Aumentado para 8rem para compensar a remoção do <br> manual */
     .block-container {
-        padding-top: 5rem; /* Ajustado levemente para acomodar o título */
+        padding-top: 8rem; 
         padding-bottom: 2rem;
     }
     
@@ -61,7 +62,7 @@ st.markdown("""
 
 # --- Barra Lateral ---
 with st.sidebar:
-    st.header("Entre com Ação e Período")
+    st.header("Configurações")
     ticker = st.text_input("Símbolo da Ação", value="PETR4.SA")
     
     data_padrao_inicio = date.today() - timedelta(days=800)
@@ -82,7 +83,7 @@ def get_price_at_date(df, target_date):
 
 # --- Lógica Principal ---
 try:
-    # --- TÍTULO PRINCIPAL ADICIONADO AQUI ---
+    # Título Principal
     st.title("Painel de Ações Simples")
 
     # Baixar dados
@@ -111,7 +112,7 @@ try:
             st.metric("Mudança Percentual", f"{diff_pct:.2f}%")
 
         # --- 2. Layout Principal (Gráfico + Tabela) ---
-        st.markdown("<br>", unsafe_allow_html=True) 
+        # Removido o st.markdown("<br>") que causava erro no deploy
         
         col_main, col_side = st.columns([2, 1])
 
